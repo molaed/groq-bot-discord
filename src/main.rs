@@ -27,9 +27,9 @@ struct Handler;
 
 #[async_trait]
 impl EventHandler for Handler {
-     async fn message(&slf, _ctx: Context, msg: Message) {
-
-     }
+    async fn message(&self, ctx: Context, msg: Message) {
+        let bot_id = ctx.cache.current_user_id();
+    }
 }
 
 #[tokio::main]
@@ -65,8 +65,8 @@ async fn main() {
         .await
         .expect("Error creating discord client");
 
-    if let Err(why) = client.start().await {
-        printlin!("Client error: {why:?}");
+    if let Err(why) = discord_client.start().await {
+        println!("Client error: {why:?}");
     }
 
 }
